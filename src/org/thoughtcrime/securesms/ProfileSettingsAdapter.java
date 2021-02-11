@@ -31,7 +31,6 @@ import java.util.Set;
 public class ProfileSettingsAdapter extends RecyclerView.Adapter
                                     implements StickyHeaderAdapter<ProfileSettingsAdapter.HeaderViewHolder>
 {
-  public static final int SETTING_CONTACT_ADDR = 110;
   public static final int SETTING_STATUS = 115;
   public static final int SETTING_NEW_CHAT = 120;
 
@@ -273,7 +272,6 @@ public class ProfileSettingsAdapter extends RecyclerView.Adapter
     }
     else if (sharedChats!=null && dcContact!=null) {
       itemDataContact = dcContact;
-      itemData.add(new ItemData(ItemData.TYPE_PRIMARY_SETTING, SETTING_CONTACT_ADDR,dcContact.getAddr()));
       if (!dcContact.getStatus().isEmpty()) {
         itemData.add(new ItemData(ItemData.TYPE_PRIMARY_SETTING, SETTING_STATUS, dcContact.getStatus()));
       }

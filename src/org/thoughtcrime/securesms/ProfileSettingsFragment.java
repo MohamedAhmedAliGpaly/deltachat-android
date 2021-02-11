@@ -11,7 +11,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -33,7 +32,6 @@ import org.thoughtcrime.securesms.connect.DcHelper;
 import org.thoughtcrime.securesms.mms.GlideApp;
 import org.thoughtcrime.securesms.qr.QrShowActivity;
 import org.thoughtcrime.securesms.util.StickyHeaderDecoration;
-import org.thoughtcrime.securesms.util.Util;
 import org.thoughtcrime.securesms.util.ViewUtil;
 
 import java.util.ArrayList;
@@ -138,9 +136,6 @@ public class ProfileSettingsFragment extends Fragment
   @Override
   public void onSettingsClicked(int settingsId) {
     switch(settingsId) {
-      case ProfileSettingsAdapter.SETTING_CONTACT_ADDR:
-        onContactAddrClicked();
-        break;
       case ProfileSettingsAdapter.SETTING_NEW_CHAT:
         onNewChat();
         break;
@@ -210,21 +205,6 @@ public class ProfileSettingsFragment extends Fragment
     intent.putExtra(ConversationActivity.CHAT_ID_EXTRA, chatId);
     getContext().startActivity(intent);
     getActivity().finish();
-  }
-
-  private void onContactAddrClicked() {
-    String address = dcContext.getContact(contactId).getAddr();
-    new AlertDialog.Builder(getContext())
-        .setTitle(address)
-        .setItems(new CharSequence[]{
-                getContext().getString(R.string.menu_copy_to_clipboard)
-            },
-            (dialogInterface, i) -> {
-              Util.writeTextToClipboard(getContext(), address);
-              Toast.makeText(getContext(), getString(R.string.copied_to_clipboard), Toast.LENGTH_SHORT).show();
-            })
-        .setNegativeButton(R.string.cancel, null)
-        .show();
   }
 
   private void onNewChat() {
